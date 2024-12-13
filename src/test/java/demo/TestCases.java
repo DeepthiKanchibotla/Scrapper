@@ -15,20 +15,43 @@ import java.util.logging.Level;
 import demo.wrappers.Wrappers;
 
 public class TestCases {
-    ChromeDriver driver;
+    static ChromeDriver driver;
 
     /*
-     * TODO: Write your tests here with testng @Test annotation. 
-     * Follow `testCase01` `testCase02`... format or what is provided in instructions
+     * TODO: Write your tests here with testng @Test annotation.
+     * Follow `testCase01` `testCase02`... format or what is provided in
+     * instructions
      */
+    @Test
+    public static void testCase01() {
+        System.out.println("Start of TestCase01");
 
-     
+        Wrappers.navigateURL(driver, "https://www.scrapethissite.com/pages/");
+        Wrappers.navigateToPage(driver,"Hockey Teams");
+        Wrappers.teamData(driver);
+
+        System.out.println("End of TestCase01");
+    }
+
+    @Test
+    public static void testCase02() {
+        System.out.println("Start of TestCase02");
+
+        Wrappers.navigateURL(driver, "https://www.scrapethissite.com/pages/");
+        Wrappers.navigateToPage(driver,"Oscar Winning Films");
+        Wrappers.bestPictureWinner(driver);
+        Wrappers.verifyFile();
+
+        System.out.println("End of TestCase02");
+    }
+
+
     /*
-     * Do not change the provided methods unless necessary, they will help in automation and assessment
+     * Do not change the provided methods unless necessary, they will help in
+     * automation and assessment
      */
     @BeforeTest
-    public void startBrowser()
-    {
+    public void startBrowser() {
         System.setProperty("java.util.logging.config.file", "logging.properties");
 
         // NOT NEEDED FOR SELENIUM MANAGER
@@ -42,7 +65,7 @@ public class TestCases {
         options.setCapability("goog:loggingPrefs", logs);
         options.addArguments("--remote-allow-origins=*");
 
-        System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY, "build/chromedriver.log"); 
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY, "build/chromedriver.log");
 
         driver = new ChromeDriver(options);
 
@@ -50,8 +73,7 @@ public class TestCases {
     }
 
     @AfterTest
-    public void endTest()
-    {
+    public void endTest() {
         driver.close();
         driver.quit();
 
